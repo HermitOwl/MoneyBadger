@@ -19,15 +19,20 @@
 
     <div data-role="header">
         <h1>Welcome</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
     </div>
 
     <div data-role="content">
+        <form>
+            Name<br>
+            <input type="text" id="name"><br>
+            Password<br>
+            <input type="password" id="password">
+        </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 <!--Home Page-->
@@ -35,18 +40,23 @@
 
     <div data-role="header">
         <h1>MoneyBadger</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#settings" data-icon="gear">Settings</a>
     </div>
 
     <div data-role="content">
-        <a href="#addIncome" data-role="button">Add Income</a>
-        <a href="#addExpenditure" data-role="button">Add Expenditure</a>
+        <a href="#addIncome" data-role="button">Add Income<br><h3 align="center">£2000.00</h3></a>
+        <a href="#addExpenditure" data-role="button">Add Expenditure<br><h3 align="center">£1000.00</h3></a>
+
+        <h2 align="center">Total Savings</h2>
+        <h1 align="center">£1000.00</h1>
+
         <a href="#history" data-role="button">View History</a>
         <a href="#welcome" data-role="button">Exit</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 <!--Settings Page-->
@@ -54,7 +64,7 @@
 
     <div data-role="header">
         <h1>Settings</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
     </div>
 
     <div data-role="content">
@@ -64,7 +74,7 @@
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 <!--Add Income Page-->
@@ -72,15 +82,21 @@
 
     <div data-role="header">
         <h1>Add Income</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
     </div>
 
     <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="addIncomeType"><br>
+            Amount<br>
+            <input type="text" id="addIncomeAmount">
+        </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 <!--Add Expenditure Page-->
@@ -88,15 +104,21 @@
 
     <div data-role="header">
         <h1>Add Expenditure</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
     </div>
 
     <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="addExpenditureType"><br>
+            Amount<br>
+            <input type="text" id="addExpenditureAmount">
+        </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 <!--History Page-->
@@ -104,14 +126,26 @@
 
     <div data-role="header">
         <h1>History</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
     </div>
 
-    <div data-role="content">
+    <div data-role="listview">
+        <ul>
+            <li>
+                <h3>Pay</h3><h2>£2000.00</h2>
+                <a href="#reminder" data-role="button" data-mini="true">Reminder</a>
+                <a href="#editIncome" data-role="button" data-mini="true">Edit</a>
+            </li>
+            <li>
+                <h3>Rent</h3><h2>£1000.00</h2>
+                <a href="#editReminder" data-role="button" data-mini="true">Edit Reminder</a>
+                <a href="#editIncome" data-role="button" data-mini="true">Edit</a>
+            </li>
+        </ul>
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 <!--Edit Income Page-->
@@ -119,15 +153,22 @@
 
     <div data-role="header">
         <h1>Edit Income</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#" data-rel="back" data-icon="delete">Delete</a>
     </div>
 
     <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="editIncomeType"><br>
+            Amount<br>
+            <input type="text" id="editIncomeAmount">
+        </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 <!--Edit Expenditure Page-->
@@ -135,15 +176,22 @@
 
     <div data-role="header">
         <h1>Edit Expenditure</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#" data-rel="back" data-icon="delete">Delete</a>
     </div>
 
     <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="editExpenditureType"><br>
+            Amount<br>
+            <input type="text" id="editExpenditureAmount">
+        </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 <!--Reminder Page-->
@@ -151,15 +199,25 @@
 
     <div data-role="header">
         <h1>Add Reminder</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
     </div>
 
     <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="reminderType"><br>
+            Amount<br>
+            <input type="text" id="reminderAmount">
+            Time<br>
+            <input type="time" id="reminderTime">
+            Date<br>
+            <input type="date" id="reminderDate">
+        </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 <!--Edit Reminder Page-->
@@ -167,15 +225,26 @@
 
     <div data-role="header">
         <h1>Edit Reminder</h1>
-        <a href="#" data-rel="back" data-icon="back"></a>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#" data-rel="back" data-icon="delete">Delete</a>
     </div>
 
     <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="editReminderType"><br>
+            Amount<br>
+            <input type="text" id="editReminderAmount">
+            Time<br>
+            <input type="time" id="editReminderTime">
+            Date<br>
+            <input type="date" id="editReminderDate">
+        </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
-     </div>
+    </div>
 </div>
 
 </body>
