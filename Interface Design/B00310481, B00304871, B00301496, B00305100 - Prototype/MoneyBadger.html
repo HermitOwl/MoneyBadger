@@ -4,8 +4,8 @@
 <!--Initialisation-->
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
@@ -91,6 +91,10 @@
             <input type="text" id="addIncomeType"><br>
             Amount<br>
             <input type="text" id="addIncomeAmount">
+            Time<br>
+            <input type="time" id="addIncomeTime">
+            Date<br>
+            <input type="date" id="addIncomeDate">
         </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
@@ -113,6 +117,10 @@
             <input type="text" id="addExpenditureType"><br>
             Amount<br>
             <input type="text" id="addExpenditureAmount">
+            Time<br>
+            <input type="time" id="addExpenditureTime">
+            Date<br>
+            <input type="date" id="addExpenditureDate">
         </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
@@ -163,6 +171,10 @@
             <input type="text" id="editIncomeType"><br>
             Amount<br>
             <input type="text" id="editIncomeAmount">
+            Time<br>
+            <input type="time" id="editIncomeTime">
+            Date<br>
+            <input type="date" id="editIncomeDate">
         </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
@@ -186,6 +198,10 @@
             <input type="text" id="editExpenditureType"><br>
             Amount<br>
             <input type="text" id="editExpenditureAmount">
+            Time<br>
+            <input type="time" id="editExpenditureTime">
+            Date<br>
+            <input type="date" id="editExpenditureDate">
         </form>
         <a href="#home" data-role="button">Confirm</a>
     </div>
@@ -213,7 +229,7 @@
             Date<br>
             <input type="date" id="reminderDate">
         </form>
-        <a href="#home" data-role="button">Confirm</a>
+        <a href="#history" data-role="button">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
@@ -240,11 +256,20 @@
             Date<br>
             <input type="date" id="editReminderDate">
         </form>
-        <a href="#home" data-role="button">Confirm</a>
+        <a href="#history" data-role="button">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
     </div>
+</div>
+
+<!--Custom Styling-->
+<div>
+    <script>
+        $("document").ready(function(){
+
+        });
+    </script>
 </div>
 
 </body>
