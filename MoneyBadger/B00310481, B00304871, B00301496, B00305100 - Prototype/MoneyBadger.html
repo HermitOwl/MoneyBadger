@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Initialisation-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="jquery-mobile-theme-175738-0/themes/MoneyBadger.css"/>
+    <link rel="stylesheet" href="jquery-mobile-theme-175738-0/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <title>MoneyBadger</title>
+</head>
+
+<body>
+
+<!--Initial Welcome Page-->
+<div data-role="page" id="initial">
+
+    <div data-role="header">
+        <h1>Welcome</h1>
+    </div>
+
+    <div data-role="content">
+        <form>
+            <div style="text-align: center">
+                <img src="jquery-mobile-theme-175738-0/themes/images/logo.PNG" width="290" height="190">
+            </div>
+            Name<br>
+            <input type="text" id="nameStart"><br>
+            Password<br>
+            <input type="password" id="passwordStart">
+            Confirm Password<br>
+            <input type="password" id="passwordConfirm">
+        </form>
+        <br>
+        <a href="#home" data-role="button">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Welcome Page-->
+<div data-role="page" id="welcome">
+
+    <div data-role="header">
+        <h1>Welcome</h1>
+    </div>
+
+    <div data-role="content">
+        <form>
+            <img src="jquery-mobile-theme-175738-0/themes/images/logo.PNG" width="290" height="190"><br>
+            Name<br>
+            <input type="text" id="name"><br>
+            Password<br>
+            <input type="password" id="password">
+        </form>
+        <br>
+        <a href="#home" data-role="button">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Home Page-->
+<div data-role="page" id="home">
+
+    <div data-role="header">
+        <h1>MoneyBadger</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#settings" data-icon="gear">Settings</a>
+    </div>
+
+    <div data-role="content">
+        <a href="#addIncome" data-role="button">Add Income<br><h3 align="center">£2000.00</h3></a>
+        <a href="#addExpenditure" data-role="button">Add Expenditure<br><h3 align="center">£1000.00</h3></a>
+
+        <h2 align="center">Total Savings</h2>
+        <h1 align="center">£1000.00</h1>
+
+        <a href="#history" data-role="button">View History</a>
+        <a href="#welcome" data-role="button">Exit</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Settings Page-->
+<div data-role="page" id="settings">
+
+    <div data-role="header">
+        <h1>Settings</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+
+    <div data-role="content">
+        <a href="#welcome" data-role="button">Change Details</a>
+        <a href="#" data-role="button">Export to .csv</a>
+        <a href="#welcome" data-role="button">Reset Budget Data</a>
+        <br>
+        <a href="#initial" data-role="button">Reset User Data</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Add Income Page-->
+<div data-role="page" id="addIncome">
+
+    <div data-role="header">
+        <h1>Add Income</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+
+    <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="addIncomeType"><br>
+            Amount<br>
+            <input type="text" id="addIncomeAmount">
+            <div data-role="collapsible">
+                <h1>Timed Payment?</h1>
+                <div data-role="content">
+                    <form>
+                        Time<br>
+                        <input type="time" id="addIncomeTime">
+                        Date<br>
+                        <input type="date" id="addIncomeDate">
+                    </form>
+                </div>
+            </div>
+        </form>
+        <a href="#home" data-role="button">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Add Expenditure Page-->
+<div data-role="page" id="addExpenditure">
+
+    <div data-role="header">
+        <h1>Add Expenditure</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+
+    <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="addExpenditureType"><br>
+            Amount<br>
+            <input type="text" id="addExpenditureAmount"><br>
+            <div data-role="collapsible">
+                <h1>Timed Payment?</h1>
+                <div data-role="content">
+                    <form>
+                        Time<br>
+                        <input type="time" id="addExpenditureIncomeTime">
+                        Date<br>
+                        <input type="date" id="addExpenditureIncomeDate">
+                    </form>
+                </div>
+            </div>
+        </form>
+        <a href="#home" data-role="button">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--History Page-->
+<div data-role="page" id="history">
+
+    <div data-role="header">
+        <h1>Current Month</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+
+    <div data-role="listview" id="incomeHistory">
+        <table >
+            <tr>
+                <h3 align="center">Pay</h3><h2 align="center">£2000.00</h2>
+                <a href="#reminder" data-role="button" data-mini="true">Reminder</a>
+                <a href="#editIncome" data-role="button" data-mini="true">Edit</a>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div data-role="listview">
+        <table bgcolor="#faebd7">
+            <tr>
+                <h3 align="center">Rent</h3><h2 align="center">£1000.00</h2>
+                <a href="#editReminder" data-role="button" data-mini="true">Edit Reminder</a>
+                <a href="#editExpenditure" data-role="button" data-mini="true">Edit</a>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <a href="#" style="display: inline-block; float: left" data-role="button" data-icon="carat-l"></a>
+                <a href="#" style="display: inline-block; float: right" data-role="button" data-icon="carat-r"></a>
+            </tr>
+        </table>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Edit Income Page-->
+<div data-role="page" id="editIncome">
+
+    <div data-role="header">
+        <h1>Edit Income</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#" data-rel="back" data-icon="delete">Delete</a>
+    </div>
+
+    <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="editIncomeType"><br>
+            Amount<br>
+            <input type="text" id="editIncomeAmount"><br>
+            <div data-role="collapsible">
+                <h1>Timed Payment?</h1>
+                <div data-role="content">
+                    <form>
+                        Time<br>
+                        <input type="time" id="editIncomeTime">
+                        Date<br>
+                        <input type="date" id="editIncomeDate">
+                    </form>
+                </div>
+            </div>
+        </form>
+        <br><a href="#home" data-role="button">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Edit Expenditure Page-->
+<div data-role="page" id="editExpenditure">
+
+    <div data-role="header">
+        <h1>Edit Expenditure</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#" data-rel="back" data-icon="delete">Delete</a>
+    </div>
+
+    <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="editExpenditureType"><br>
+            Amount<br>
+            <input type="text" id="editExpenditureAmount"><br>
+            <div data-role="collapsible">
+                <h1>Timed Payment?</h1>
+                <div data-role="content">
+                    <form>
+                        Time<br>
+                        <input type="time" id="editExpenditureTime"><br>
+                        Date<br>
+                        <input type="date" id="editExpenditureDate">
+                    </form>
+                </div>
+            </div>
+        </form>
+        <br><a href="#home" data-role="button">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Reminder Page-->
+<div data-role="page" id="reminder">
+
+    <div data-role="header">
+        <h1>Add Reminder</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+
+    <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="reminderType"><br>
+            Amount<br>
+            <input type="text" id="reminderAmount">
+            Time<br>
+            <input type="time" id="reminderTime">
+            Date<br>
+            <input type="date" id="reminderDate">
+        </form>
+        <a href="#home" data-role="button">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Edit Reminder Page-->
+<div data-role="page" id="editReminder">
+
+    <div data-role="header">
+        <h1>Edit Reminder</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#" data-rel="back" data-icon="delete">Delete</a>
+    </div>
+
+    <div data-role="content">
+        <form>
+            Type<br>
+            <input type="text" id="editReminderType"><br>
+            Amount<br>
+            <input type="text" id="editReminderAmount">
+            Time<br>
+            <input type="time" id="editReminderTime">
+            Date<br>
+            <input type="date" id="editReminderDate">
+        </form>
+        <a href="#home" data-role="button">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+</body>
+</html>
