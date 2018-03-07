@@ -12,31 +12,36 @@ function Reminder(name, description, date, frequency){
 
 // Asset Object - Leon Irving B00301496
 
-// Instantiates a new asset
-function Asset(name, quantity, isIncome, Reminder){
+/*
+Instantiates a new Asset object based on its name, quantity, and isIncome.
+The method also sets reminder to a blank state with just dueDate and frequency fields set.
+ */
+function Asset(name, quantity, isIncome, Reminder)
+{
     this.name = name;
     this.quantity = quantity;
     this.isIncome = isIncome;
     this.reminder = new Reminder("", "", new Date(), 0);
 }
 
-// Setting a new reminder
-function setReminder(name, description, date, frequency){
-	Reminder.name = name;
-	Reminder.description = description;
-	Reminder.date = date;
-	Reminder.frequency = frequency;
+/*
+Calls the Reminder() method and sets reminder to the parameters listed.
+ */
+function setReminder(name, description, date, frequency)
+{
+	var reminder = new Reminder(name, description, date, frequency);
 }
 
-// Reset a reminder
-function removeReminder(){
+/*
+Resets the reminder to a blank state.
+ */
+function removeReminder()
+{
 	Reminder.name = "";
 	Reminder.description = "";
 	Reminder.date = new Date();
 	Reminder.frequency = 0;
 }
-
-//
 
 function UserBudget(userName, userPassword, filePath){
 	this.userName = userName;
