@@ -16,8 +16,7 @@ function Reminder(name, description, date, frequency){
 Instantiates a new Asset object based on its name, quantity, and isIncome.
 The method also sets reminder to a blank state with just dueDate and frequency fields set.
  */
-var Asset = function(name, quantity, isIncome, Reminder)
-{
+var Asset = function(name, quantity, isIncome, Reminder) {
     this.name = name;
     this.quantity = quantity;
     this.isIncome = isIncome;
@@ -27,16 +26,14 @@ var Asset = function(name, quantity, isIncome, Reminder)
 /*
 Calls the Reminder() method and sets reminder to the parameters listed.
  */
-Asset.prototype.setReminder = function(name, description, date, frequency)
-{
+Asset.prototype.setReminder = function(name, description, date, frequency) {
 	this.reminder = new Reminder(name, description, date, frequency);
 };
 
 /*
 Resets the reminder to a blank state.
  */
-Asset.prototype.removeReminder = function()
-{
+Asset.prototype.removeReminder = function() {
     this.reminder.name = "";
     this.reminder.description = "";
     this.reminder.date = new Date();
