@@ -29,7 +29,7 @@ Calls the Reminder() method and sets reminder to the parameters listed.
  */
 Asset.prototype.setReminder = function(name, description, date, frequency)
 {
-	Asset.reminder = new Reminder(name, description, date, frequency);
+	this.reminder = new Reminder(name, description, date, frequency);
 };
 
 /*
@@ -37,10 +37,10 @@ Resets the reminder to a blank state.
  */
 Asset.prototype.removeReminder = function()
 {
-	Asset.reminder.name = "";
-	Asset.reminder.description = "";
-	Asset.reminder.date = new Date();
-	Asset.reminder.frequency = 0;
+    this.reminder.name = "";
+    this.reminder.description = "";
+    this.reminder.date = new Date();
+    this.reminder.frequency = 0;
 };
 
 function UserBudget(userName, userPassword, filePath){
