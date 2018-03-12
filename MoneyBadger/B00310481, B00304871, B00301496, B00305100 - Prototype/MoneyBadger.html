@@ -76,11 +76,13 @@
     </div>
 
     <div data-role="content">
-        <a href="#addIncome" data-role="button">Add Income<br><h3 align="center">£2000.00</h3></a>
-        <a href="#addExpenditure" data-role="button">Add Expenditure<br><h3 align="center">£1000.00</h3></a>
+        <a href="#addIncome" data-role="button">Add Income<br><h3 align="center" id="totalIncome">£0.00</h3></a>
+        <a href="#addExpenditure" data-role="button">Add Expenditure<br><h3 align="center" id="totalExpenditure">£0.00</h3></a>
 
-        <h2 align="center">Total Savings</h2>
-        <h1 align="center">£1000.00</h1>
+        <div style="background-image: linear-gradient(#3388cc, DeepSkyBlue); border-radius: 10px;">
+            <h2 align="center">Total Savings</h2>
+            <h1 align="center" id="totalSavings">£0.00</h1>
+        </div>
 
         <a href="#history" data-role="button">View History</a>
         <a href="#welcome" data-role="button">Exit</a>
@@ -99,11 +101,11 @@
     </div>
 
     <div data-role="content">
-        <a href="#welcome" data-role="button">Change Details</a>
-        <a href="#" data-role="button">Export to .csv</a>
-        <a href="#welcome" data-role="button">Reset Budget Data</a>
+        <a href="#welcome" data-role="button" id="changeDetails">Change Details</a>
+        <a href="#" data-role="button" id="csvExport">Export to .csv</a>
+        <a href="#welcome" data-role="button" id="budgetReset">Reset Budget Data</a>
         <br>
-        <a href="#initial" data-role="button">Reset User Data</a>
+        <a href="#initial" data-role="button" id="userReset">Reset User Data</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
@@ -115,28 +117,19 @@
 
     <div data-role="header">
         <h1>Add Income</h1>
-        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#" data-rel="back" data-icon="back" id="addIncomeBack">Back</a>
     </div>
 
     <div data-role="content">
         <form>
-            Type<br>
-            <input type="text" id="addIncomeType"><br>
+            Name<br>
+            <input type="text" id="addIncomeName"><br>
             Amount<br>
-            <input type="text" id="addIncomeAmount">
-            <div data-role="collapsible">
-                <h1>Timed Payment?</h1>
-                <div data-role="content">
-                    <form>
-                        Time<br>
-                        <input type="time" id="addIncomeTime">
-                        Date<br>
-                        <input type="date" id="addIncomeDate">
-                    </form>
-                </div>
-            </div>
-        </form>
-        <a href="#home" data-role="button">Confirm</a>
+            <input type="text" id="addIncomeAmount"><br>
+            Date<br>
+            <input type="date" id="addIncomeDate">
+        </form><br>
+        <a href="#home" data-role="button" id="addIncomeConfirm">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
@@ -148,28 +141,19 @@
 
     <div data-role="header">
         <h1>Add Expenditure</h1>
-        <a href="#" data-rel="back" data-icon="back">Back</a>
+        <a href="#" data-rel="back" data-icon="back" id="addExpenditureBack">Back</a>
     </div>
 
     <div data-role="content">
         <form>
-            Type<br>
-            <input type="text" id="addExpenditureType"><br>
+            Name<br>
+            <input type="text" id="addExpenditureName"><br>
             Amount<br>
             <input type="text" id="addExpenditureAmount"><br>
-            <div data-role="collapsible">
-                <h1>Timed Payment?</h1>
-                <div data-role="content">
-                    <form>
-                        Time<br>
-                        <input type="time" id="addExpenditureIncomeTime">
-                        Date<br>
-                        <input type="date" id="addExpenditureIncomeDate">
-                    </form>
-                </div>
-            </div>
-        </form>
-        <a href="#home" data-role="button">Confirm</a>
+            Date<br>
+            <input type="date" id="addExpenditureDate">
+        </form><br>
+        <a href="#home" data-role="button" id="addExpenditureConfirm">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
@@ -186,31 +170,35 @@
 
     <div data-role="listview" id="incomeHistory">
         <table>
+            <!-- Example income entry -->
             <tr>
-                <h3 align="center">Pay</h3><h2 align="center">£2000.00</h2>
-                <a href="#reminder" data-role="button" data-mini="true" data-inline="true">Reminder</a>
-                <a href="#editIncome" data-role="button" data-mini="true" data-inline="true">Edit</a>
+                <h3 align="center">Income</h3><h2 align="center">£0.00</h2>
+                <a href="#editReminder" data-role="button" data-mini="true" data-inline="true">Edit Reminder</a>
+                <a href="#editIncome" data-role="button" data-mini="true" data-inline="true"  style="float: right">Edit</a>
             </tr>
         </table>
     </div>
 
     <hr>
 
-    <div data-role="listview">
-        <table bgcolor="#faebd7">
+    <div data-role="listview" id="expenditureHistory">
+        <table>
+            <!-- Example expenditure entry -->
             <tr>
-                <h3 align="center">Rent</h3><h2 align="center">£1000.00</h2>
+                <h3 align="center">Expenditure</h3><h2 align="center">£0.00</h2>
                 <a href="#editReminder" data-role="button" data-mini="true" data-inline="true">Edit Reminder</a>
-                <a href="#editExpenditure" data-role="button" data-mini="true" data-inline="true">Edit</a>
+                <a href="#editExpenditure" data-role="button" data-mini="true" data-inline="true"  style="float: right">Edit</a>
             </tr>
         </table>
     </div>
 
+    <hr>
+
     <div>
         <table>
             <tr>
-                <a href="#" style="display: inline-block; float: left" data-role="button" data-icon="carat-l"></a>
-                <a href="#" style="display: inline-block; float: right" data-role="button" data-icon="carat-r"></a>
+                <a href="#" data-inline="true" data-role="button" data-icon="carat-l" id="historyBack"></a>
+                <a href="#" style="display: inline-block; float: right" data-role="button" data-icon="carat-r" id="historyForward"></a>
             </tr>
         </table>
     </div>
@@ -225,28 +213,19 @@
     <div data-role="header">
         <h1>Edit Income</h1>
         <a href="#" data-rel="back" data-icon="back">Back</a>
-        <a href="#" data-rel="back" data-icon="delete">Delete</a>
+        <a href="#" data-rel="back" data-icon="delete" id="incomeDelete">Delete</a>
     </div>
 
     <div data-role="content">
         <form>
-            Type<br>
-            <input type="text" id="editIncomeType"><br>
+            Name<br>
+            <input type="text" id="editIncomeName"><br>
             Amount<br>
             <input type="text" id="editIncomeAmount"><br>
-            <div data-role="collapsible">
-                <h1>Timed Payment?</h1>
-                <div data-role="content">
-                    <form>
-                        Time<br>
-                        <input type="time" id="editIncomeTime">
-                        Date<br>
-                        <input type="date" id="editIncomeDate">
-                    </form>
-                </div>
-            </div>
+            Date<br>
+            <input type="date" id="editIncomeDate">
         </form>
-        <br><a href="#home" data-role="button">Confirm</a>
+        <br><a href="#home" data-role="button" id="editIncomeConfirm">Confirm</a>
     </div>
 
     <div data-role="footer" data-position="fixed">
@@ -259,7 +238,7 @@
     <div data-role="header">
         <h1>Edit Expenditure</h1>
         <a href="#" data-rel="back" data-icon="back">Back</a>
-        <a href="#" data-rel="back" data-icon="delete">Delete</a>
+        <a href="#" data-rel="back" data-icon="delete" id="expenditureDelete">Delete</a>
     </div>
 
     <div data-role="content">
@@ -268,7 +247,48 @@
             <input type="text" id="editExpenditureType"><br>
             Amount<br>
             <input type="text" id="editExpenditureAmount"><br>
-            <div data-role="collapsible">
+            Date<br>
+            <input type="date" id="editExpenditureDate">
+        </form>
+        <br><a href="#home" data-role="button" id="editExpenditureConfirm">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+<!--Edit Reminder Page-->
+<div data-role="page" id="editReminder">
+
+    <div data-role="header">
+        <h1>Edit Reminder</h1>
+        <a href="#" data-rel="back" data-icon="back" id="editReminderBack">Back</a>
+    </div>
+
+    <div data-role="content">
+        <form>
+            Name<br>
+            <input type="text" id="editReminderName"><br>
+            Description<br>
+            <input type="text" id="editReminderDescription"><br>
+            Date<br>
+            <input type="date" id="editReminderDate"><br>
+            Frequency<br>
+            <input type="text" id="editReminderFrequency"><br>
+
+        </form>
+        <a href="#home" data-role="button" id="editReminderConfirm">Confirm</a>
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+    </div>
+</div>
+
+</body>
+</html>
+
+<!--
+             <div data-role="collapsible">
                 <h1>Timed Payment?</h1>
                 <div data-role="content">
                     <form>
@@ -279,15 +299,9 @@
                     </form>
                 </div>
             </div>
-        </form>
-        <br><a href="#home" data-role="button">Confirm</a>
-    </div>
+-->
 
-    <div data-role="footer" data-position="fixed">
-    </div>
-</div>
-
-<!--Reminder Page-->
+<!--Reminder Page
 <div data-role="page" id="reminder">
 
     <div data-role="header">
@@ -312,33 +326,4 @@
     <div data-role="footer" data-position="fixed">
     </div>
 </div>
-
-<!--Edit Reminder Page-->
-<div data-role="page" id="editReminder">
-
-    <div data-role="header">
-        <h1>Edit Reminder</h1>
-        <a href="#" data-rel="back" data-icon="back">Back</a>
-        <a href="#" data-rel="back" data-icon="delete">Delete</a>
-    </div>
-
-    <div data-role="content">
-        <form>
-            Type<br>
-            <input type="text" id="editReminderType"><br>
-            Amount<br>
-            <input type="text" id="editReminderAmount">
-            Time<br>
-            <input type="time" id="editReminderTime">
-            Date<br>
-            <input type="date" id="editReminderDate">
-        </form>
-        <a href="#home" data-role="button">Confirm</a>
-    </div>
-
-    <div data-role="footer" data-position="fixed">
-    </div>
-</div>
-
-</body>
-</html>
+-->
