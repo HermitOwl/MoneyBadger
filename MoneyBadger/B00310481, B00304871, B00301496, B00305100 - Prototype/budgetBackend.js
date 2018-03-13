@@ -1,8 +1,20 @@
+var nameField, quantityField, dueDateField, freqField, addIncomeButton, confirm;
+
+document.onload = function(){
+    nameField = document.getElementById("addIncomeName");
+    quantityField = document.getElementById("addIncomeAmount");
+    dueDateField = document.getElementById("addIncomeDate");
+    freqField = document.getElementById("addIncomeFrequency");
+    addIncomeButton = document.getElementById("addIncomeConfirm");
+    addIncomeButton.onclick = addAsset(nameField.value, quantityField.value, true, freqField.value);
+};
+
 function IOControl(userFilePath){
 	this.userFilePath = userFilePath;
 	this.userFile ="";
 };
 
+//B00304871
 function Reminder(name, description, date, frequency){
 
     this.name = name;
@@ -61,6 +73,7 @@ Reminder.spawnNextReminder = function() {
 
 //https://stackoverflow.com/questions/499838/javascript-date-next-month
 //https://stackoverflow.com/questions/19225414/how-to-get-the-hours-difference-between-two-date-objects
+//
 
 // Asset Object - Leon Irving B00301496
 
@@ -68,7 +81,7 @@ Reminder.spawnNextReminder = function() {
 Instantiates a new Asset object based on its name, quantity, and isIncome.
 The method also sets reminder to a blank state with just dueDate and frequency fields set.
  */
-var Asset = function(name, quantity, isIncome, Reminder) {
+var Asset = function(name, quantity, isIncome) {
     this.name = name;
     this.quantity = quantity;
     this.isIncome = isIncome;
@@ -92,24 +105,172 @@ Asset.prototype.removeReminder = function() {
     this.reminder.frequency = 0;
 };
 
-var addIncomeName, addIncomeAmount, addIncomeDate, addIncomeButton;
-
-function addIncome(addIncomeName, addIncomeAmount, addIncomeDate){
-    var asset = new Asset(addIncomeName.value, addIncomeAmount.value, addIncomeDate.date);
-    console.log(asset);
+function UserBudget(userName, userPassword, filePath)
+{
+    this.userName = userName;
+    this.userPassword = userPassword;
+    this.saveFileLocation = filePath +"/" + userName;
+    this.Income = [];
+    this.Expenditure = [];
 }
 
-window.onload = function(){
-    console.log("test");
-	addIncomeName = document.getElementById("addIncomeName");
-    addIncomeAmount = document.getElementById("addIncomeAmount");
-    addIncomeDate = document.getElementById("addIncomeDate");
-    addIncomeButton = document.getElementById("addIncomeConfirm");
-    addIncomeButton.onclick = addIncome(addIncomeName, addIncomeAmount, addIncomeDate);
-};
+function addAsset(name, quantity, isIncome, frequency, dueDate)
+{
+    var a = new Asset(name.value, quantity.value, isIncome.value, frequency, dueDate);
+    if (a.isIncome = true)
+    {
+        Income.push(a);
+    }
+    else
+        Expenditure.push(a);
+}
 
-function UserBudget(userName, userPassword, filePath){
-	this.userName = userName;
-	this.userPassword = userPassword;
-	this.saveFileLocation = filePath +"/" + userName;
-};
+UserBudget.prototype.setAsset = function (index, name, quantity, isIncome, frequency, dueDate)
+{
+    if(isIncome){
+        if(Income.length != 0)
+            for(i=0; i< Income.length; i++){
+                if(i == index){
+                    Income[i] = new Asset(name, quantity, isIncome,frequency, dueDate)
+                }
+            }
+    }
+    else
+    {
+        if(Expenditure.length != 0)
+            for(i=0; i< Expenditure.length; i++){
+                if(i == index){
+                    Expenditure[i] = new Asset(name, quantity, isIncome,frequency, dueDate)
+                }
+            }
+    }
+
+
+}
+
+function getAsset (Iindex, isIncome)
+{
+    if(isIncome){
+        return Income.splice(Iindex,1);
+    }
+    else
+    {
+        return Expenditure.splice(Iindex,1);
+    }
+}
+
+function removeIncome (index, isIncome)
+{
+    if (isIncome = true)
+    {
+        Income = Income.splice(index,1);
+    }
+    else
+        Expenditure = Expenditure.splice(index,1);
+}
+
+var totalIncome = 0;
+
+function tallyIncome ()
+{
+    Income.forEach(incomeSum)
+    {
+
+    }
+    function incomeSum()
+    {
+        totalIncome += this.quantity
+    }
+    return totalIncome;
+}
+
+var totalExpenditure = 0;
+
+function tallyExpenditure ()
+{
+    var totalExpenditure = 0;
+    Expenditure.forEach(expenditureSum)
+    {
+
+    }
+    function expenditureSum()
+    {
+        totalExpenditure += this.quantity
+    }
+    return totalExpenditure;
+}
+
+function tallySavings ()
+{
+    tallyIncome();
+    tallyExpenditure();
+    var totalSavings = totalIncome - totalExpenditure;
+    return totalSavings;
+
+}
+
+function getAssetByMonth(item){
+    if(item.Reminder.date.getMonth()== currentMonth){
+
+        if( item.Reminder.date.getYear()== currentYear){
+
+            return true;
+        }
+    }
+    else{
+        return false;
+    }
+
+}
+
+function getIncomeHistory ()
+{
+
+    //First get the month
+    var date = new Date();
+    var currentMonth =  date.getMonth();
+    var currentYear = date.getYear();
+
+    var temp = Income.filter(getAssetByMonth);
+    return temp;
+
+}
+
+function getExpenditureHistory ()
+{
+    //First get the month
+    var date = new Date();
+    var currentMonth =  date.getMonth();
+    var currentYear = date.getYear();
+
+    var temp = Expenditure.filter(getAssetByMonth);
+    return temp;
+}
+function getIncomeHistory (index)
+{
+    //First get the month
+
+    var date = new Date();
+    var indexMonth =  date.getMonth()- index;
+    while(indexMonth <0)
+    {
+        var currentYear = date.getYear()-1;
+        indexMonth += 11;
+    }
+
+    var temp = Income.filter(getAssetByMonth);
+
+}
+
+function getExpenditureHistory (index) {
+//First get the month
+
+    var date = new Date();
+    var indexMonth = date.getMonth() - index;
+    while (indexMonth < 0) {
+        var currentYear = date.getYear() - 1;
+        indexMonth += 11;
+    }
+
+    var temp = Expenditure.filter(getAssetByMonth);
+}
