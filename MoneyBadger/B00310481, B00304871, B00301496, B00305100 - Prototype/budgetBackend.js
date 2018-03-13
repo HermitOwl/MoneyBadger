@@ -4,11 +4,63 @@ function IOControl(userFilePath){
 };
 
 function Reminder(name, description, date, frequency){
-	this.name= name;
-	this.frequency = frequency;
-	this.description = description;
-	this.date = date;
+
+    this.name = name;
+    this.description = description;
+    this.date = date;
+    this.frequency = frequency
+}
+
+//would spawn after current reminder
+Reminder.spawnNextReminder = function() {
+
+    var currReminder = Reminder;
+    var now = new Date();
+    var dateOne;
+    var dateTwo;
+    var newDate = new Date();
+
+    //gets reminder for frequency 1 for every reminder then goes through if statements using that date as currReminder.
+    new Reminder().date = new Date(now.getDay(),now.getMonth()+1,now.getFullYear());
+
+    //once a month - usual payment method
+    if (Reminder.frequency = 1)
+    {
+        currReminder = new Reminder();
+        return currReminder;
+    }
+
+    //twice a month
+    if (Reminder.frequency = 2)
+    {
+        dateOne = now;
+        dateTwo = currReminder;
+
+        //gives the difference in hours between now and next reminder
+        var diff = Math.abs(dateOne.getTime() - dateTwo.getTime()) / 3600000;
+
+        //divides hours by two
+        var time = diff / 2;
+
+        //adds time to 'now' var
+        var n = now.getTime() + time;
+
+        //makes var newDate a Date type
+        n = newDate;
+
+        new Reminder().date = n;
+        return Reminder;
+    }
+
+    //four times a month
+    if (Reminder.frequency = 3)
+    {
+
+    }
 };
+
+//https://stackoverflow.com/questions/499838/javascript-date-next-month
+//https://stackoverflow.com/questions/19225414/how-to-get-the-hours-difference-between-two-date-objects
 
 // Asset Object - Leon Irving B00301496
 
@@ -38,6 +90,22 @@ Asset.prototype.removeReminder = function() {
     this.reminder.description = "";
     this.reminder.date = new Date();
     this.reminder.frequency = 0;
+};
+
+var addIncomeName, addIncomeAmount, addIncomeDate, addIncomeButton;
+
+function addIncome(addIncomeName, addIncomeAmount, addIncomeDate){
+    var asset = new Asset(addIncomeName.value, addIncomeAmount.value, addIncomeDate.date);
+    console.log(asset);
+}
+
+window.onload = function(){
+    console.log("test");
+	addIncomeName = document.getElementById("addIncomeName");
+    addIncomeAmount = document.getElementById("addIncomeAmount");
+    addIncomeDate = document.getElementById("addIncomeDate");
+    addIncomeButton = document.getElementById("addIncomeConfirm");
+    addIncomeButton.onclick = addIncome(addIncomeName, addIncomeAmount, addIncomeDate);
 };
 
 function UserBudget(userName, userPassword, filePath){
