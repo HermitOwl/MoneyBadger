@@ -3,13 +3,14 @@
 
 <!--Initialisation-->
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="jquery-mobile-theme-175738-0/themes/MoneyBadger.css"/>
     <link rel="stylesheet" href="jquery-mobile-theme-175738-0/themes/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="budgetBackend.js"></script>
 
     <title>MoneyBadger</title>
 </head>
@@ -52,7 +53,9 @@
 
     <div data-role="content">
         <form>
-            <img src="jquery-mobile-theme-175738-0/themes/images/logo.PNG" width="290" height="190"><br>
+            <div style="text-align: center">
+                <img src="jquery-mobile-theme-175738-0/themes/images/logo.PNG" width="290" height="190">
+            </div>
             Name<br>
             <input type="text" id="name"><br>
             Password<br>

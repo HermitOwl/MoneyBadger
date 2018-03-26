@@ -1,12 +1,45 @@
-var nameField, quantityField, dueDateField, freqField, addIncomeButton, confirm;
-
 document.onload = function(){
-    nameField = document.getElementById("addIncomeName");
-    quantityField = document.getElementById("addIncomeAmount");
-    dueDateField = document.getElementById("addIncomeDate");
-    freqField = document.getElementById("addIncomeFrequency");
-    addIncomeButton = document.getElementById("addIncomeConfirm");
-    addIncomeButton.onclick = addAsset(nameField.value, quantityField.value, true, freqField.value);
+    //Initial Login Page
+    var nameStart = document.getElementById("nameStart");
+    var passwordStart = document.getElementById("passwordStart");
+    var passwordConfirm = document.getElementById("passwordConfirm");
+    var initialLoginConfirmButton = document.getElementById("initialLoginConfirm");
+
+    //Login Page
+    var userName = document.getElementById("name");
+    var password = document.getElementById("password");
+    var loginConfirm = document.getElementById("loginConfirm");
+
+    //Main Menu
+    var totalIncome = document.getElementById("totalIncome").valueOf();
+    var totalExpenditure = document.getElementById("totalExpenditure").valueOf();
+    var totalSavings = document.getElementById("totalSavings").valueOf();
+
+    //Settings Page
+    var changeDetailsButton = document.getElementById("changeDetails");
+        //changeDetailsButton.onclick =
+    var csvExportButton = document.getElementById("csvExport");
+        //csvExportButton.onclick =
+    var budgetResetButton = document.getElementById("budgetReset");
+        //budgetResetButton.onclick =
+    var userResetButton = document.getElementById("userReset");
+        //userResetButton.onclick =
+
+    //Add Income Page
+    var addIncomeNameField = document.getElementById("addIncomeName");
+    var addIncomeQuantityField = document.getElementById("addIncomeAmount");
+    var addIncomeDateField = document.getElementById("addIncomeDate");
+    var addIncomeFreqField = document.getElementById("addIncomeFrequency");
+    var addIncomeConfirmButton = document.getElementById("addIncomeConfirm");
+    addIncomeConfirmButton.onclick = addAsset(addIncomeNameField.value, addIncomeQuantityField.value, true, addIncomeFreqField.value, addIncomeDateField.value);
+
+    //Add Expenditure Page
+    var addExpenditureNameField = document.getElementById("addExpenditureName");
+    var addExpenditureQuantityField = document.getElementById("addExpenditureAmount");
+    var addExpenditureDateField = document.getElementById("addExpenditureDate");
+    var addExpenditureFreqField = document.getElementById("addExpenditureFrequency");
+    var addExpenditureConfirmButton = document.getElementById("addExpenditureConfirm");
+    addExpenditureConfirmButton.onclick = addAsset(addExpenditureNameField.value, addExpenditureQuantityField.value, true, addExpenditureFreqField.value, addExpenditureDateField.value);
 };
 
 function IOControl(userFilePath){
@@ -91,19 +124,19 @@ var Asset = function(name, quantity, isIncome) {
 /*
 Calls the Reminder() method and sets reminder to the parameters listed.
  */
-Asset.prototype.setReminder = function(name, description, date, frequency) {
+function setReminder(name, description, date, frequency) {
 	this.reminder = new Reminder(name, description, date, frequency);
-};
+}
 
 /*
 Resets the reminder to a blank state.
  */
-Asset.prototype.removeReminder = function() {
+function removeReminder() {
     this.reminder.name = "";
     this.reminder.description = "";
     this.reminder.date = new Date();
     this.reminder.frequency = 0;
-};
+}
 
 function UserBudget(userName, userPassword, filePath)
 {
