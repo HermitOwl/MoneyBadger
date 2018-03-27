@@ -119,24 +119,27 @@ var Asset = function(name, quantity, isIncome) {
     this.quantity = quantity;
     this.isIncome = isIncome;
     this.reminder = new Reminder("", "", new Date(), 0);
+
+    /*
+    Calls the Reminder() method and sets reminder to the parameters listed.
+    */
+    this.setReminder = function (name, description, date, frequency) {
+        this.reminder.name = name;
+        this.reminder.description = description;
+        this.reminder.date = date;
+        this.reminder.frequency = frequency;
+    };
+
+    /*
+    Resets the reminder to a blank state.
+    */
+    this.removeReminder = function() {
+        this.reminder.name = "";
+        this.reminder.description = "";
+        this.reminder.date = new Date();
+        this.reminder.frequency = 0;
+    };
 };
-
-/*
-Calls the Reminder() method and sets reminder to the parameters listed.
- */
-function setReminder(name, description, date, frequency) {
-	this.reminder = new Reminder(name, description, date, frequency);
-}
-
-/*
-Resets the reminder to a blank state.
- */
-function removeReminder() {
-    this.reminder.name = "";
-    this.reminder.description = "";
-    this.reminder.date = new Date();
-    this.reminder.frequency = 0;
-}
 
 function UserBudget(userName, userPassword, filePath)
 {
@@ -179,7 +182,7 @@ UserBudget.prototype.setAsset = function (index, name, quantity, isIncome, frequ
     }
 
 
-}
+};
 
 function getAsset (Iindex, isIncome)
 {
@@ -206,10 +209,8 @@ var totalIncome = 0;
 
 function tallyIncome ()
 {
-    Income.forEach(incomeSum)
-    {
+    Income.forEach(incomeSum);
 
-    }
     function incomeSum()
     {
         totalIncome += this.quantity
@@ -222,10 +223,8 @@ var totalExpenditure = 0;
 function tallyExpenditure ()
 {
     var totalExpenditure = 0;
-    Expenditure.forEach(expenditureSum)
-    {
+    Expenditure.forEach(expenditureSum);
 
-    }
     function expenditureSum()
     {
         totalExpenditure += this.quantity
@@ -256,29 +255,6 @@ function getAssetByMonth(item){
 
 }
 
-function getIncomeHistory ()
-{
-
-    //First get the month
-    var date = new Date();
-    var currentMonth =  date.getMonth();
-    var currentYear = date.getYear();
-
-    var temp = Income.filter(getAssetByMonth);
-    return temp;
-
-}
-
-function getExpenditureHistory ()
-{
-    //First get the month
-    var date = new Date();
-    var currentMonth =  date.getMonth();
-    var currentYear = date.getYear();
-
-    var temp = Expenditure.filter(getAssetByMonth);
-    return temp;
-}
 function getIncomeHistory (index)
 {
     //First get the month
