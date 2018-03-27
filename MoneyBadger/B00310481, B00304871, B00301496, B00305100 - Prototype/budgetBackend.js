@@ -114,31 +114,31 @@ Reminder.spawnNextReminder = function() {
 Instantiates a new Asset object based on its name, quantity, and isIncome.
 The method also sets reminder to a blank state with just dueDate and frequency fields set.
  */
-var Asset = function(name, quantity, isIncome) {
+var Asset = function(name, quantity, isIncome, frequency, date) {
     this.name = name;
     this.quantity = quantity;
     this.isIncome = isIncome;
-    this.reminder = new Reminder("", "", new Date(), 0);
+    this.reminder = new Reminder(name, "", date, frequency);
+};
 
-    /*
-    Calls the Reminder() method and sets reminder to the parameters listed.
-    */
-    this.setReminder = function (name, description, date, frequency) {
-        this.reminder.name = name;
-        this.reminder.description = description;
-        this.reminder.date = date;
-        this.reminder.frequency = frequency;
-    };
+/*
+Calls the Reminder() method and sets reminder to the parameters listed.
+*/
+Asset.prototype.setReminder = function(name, description, date, frequency){
+    this.reminder.name = name;
+    this.reminder.description = description;
+    this.reminder.date = date;
+    this.reminder.frequency = frequency;
+};
 
-    /*
-    Resets the reminder to a blank state.
-    */
-    this.removeReminder = function() {
-        this.reminder.name = "";
-        this.reminder.description = "";
-        this.reminder.date = new Date();
-        this.reminder.frequency = 0;
-    };
+/*
+Resets the reminder to a blank state.
+*/
+Asset.prototype.removeReminder = function() {
+    this.reminder.name = "";
+    this.reminder.description = "";
+    this.reminder.date = new Date();
+    this.reminder.frequency = 0;
 };
 
 function UserBudget(userName, userPassword, filePath)
@@ -150,38 +150,36 @@ function UserBudget(userName, userPassword, filePath)
     this.Expenditure = [];
 }
 
-function addAsset(name, quantity, isIncome, frequency, dueDate)
+UserBudget.prototype.addAsset = function(name, quantity, isIncome, frequency, dueDate)
 {
-    var a = new Asset(name.value, quantity.value, isIncome.value, frequency, dueDate);
+    var a = new Asset(name, quantity, isIncome, frequency, dueDate);
     if (a.isIncome = true)
     {
-        Income.push(a);
+        this.Income.push(a);
     }
     else
-        Expenditure.push(a);
-}
+        this.Expenditure.push(a);
+};
 
 UserBudget.prototype.setAsset = function (index, name, quantity, isIncome, frequency, dueDate)
 {
     if(isIncome){
-        if(Income.length != 0)
-            for(i=0; i< Income.length; i++){
-                if(i == index){
-                    Income[i] = new Asset(name, quantity, isIncome,frequency, dueDate)
+        if(this.Income.length !== 0)
+            for(var i=0; i< this.Income.length; i++){
+                if(i === index){
+                    this.Income[i] = new Asset(name, quantity, isIncome,frequency, dueDate)
                 }
             }
     }
     else
     {
-        if(Expenditure.length != 0)
-            for(i=0; i< Expenditure.length; i++){
-                if(i == index){
-                    Expenditure[i] = new Asset(name, quantity, isIncome,frequency, dueDate)
+        if(this.Expenditure.length !== 0)
+            for(i=0; i< this.Expenditure.length; i++){
+                if(i === index){
+                    this.Expenditure[i] = new Asset(name, quantity, isIncome,frequency, dueDate)
                 }
             }
     }
-
-
 };
 
 function getAsset (Iindex, isIncome)
@@ -195,42 +193,51 @@ function getAsset (Iindex, isIncome)
     }
 }
 
-function removeIncome (index, isIncome)
+UserBudget.prototype.removeIncome = function(index, isIncome)
 {
     if (isIncome = true)
     {
-        Income = Income.splice(index,1);
+        this.Income = Income.splice(index,1);
     }
     else
-        Expenditure = Expenditure.splice(index,1);
-}
+        this.Expenditure = Expenditure.splice(index,1);
+};
 
 var totalIncome = 0;
 
-function tallyIncome ()
+UserBudget.prototype.tallyIncome = function()
 {
-    Income.forEach(incomeSum);
+   //this.Income.forEach();
 
-    function incomeSum()
+    /*
+    function incomeSum(key)
     {
-        totalIncome += this.quantity
+        totalIncome += this.key.quantity
     }
+    */
+
+    for (var i = 0; i > this.Income.length; i++){
+        totalIncome += this.Income[i].quantity;
+    }
+
     return totalIncome;
-}
+
+   //return this.Income[0].quantity;
+};
 
 var totalExpenditure = 0;
 
-function tallyExpenditure ()
+UserBudget.prototype.tallyExpenditure = function ()
 {
     var totalExpenditure = 0;
-    Expenditure.forEach(expenditureSum);
+    this.Expenditure.forEach(expenditureSum);
 
     function expenditureSum()
     {
         totalExpenditure += this.quantity
     }
     return totalExpenditure;
-}
+};
 
 function tallySavings ()
 {
@@ -242,9 +249,9 @@ function tallySavings ()
 }
 
 function getAssetByMonth(item){
-    if(item.Reminder.date.getMonth()== currentMonth){
+    if(item.Reminder.date.getMonth()=== currentMonth){
 
-        if( item.Reminder.date.getYear()== currentYear){
+        if( item.Reminder.date.getYear()=== currentYear){
 
             return true;
         }
