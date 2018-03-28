@@ -1,3 +1,5 @@
+var u = new UserBudget("username", "password", "filepath");
+
 document.onload = function(){
     //Initial Login Page
     var nameStart = document.getElementById("nameStart");
@@ -45,11 +47,11 @@ document.onload = function(){
 function IOControl(userFilePath){
 	this.userFilePath = userFilePath;
 	this.userFile ="";
-};
+}
 
 //B00304871
-function Reminder(name, description, date, frequency){
-
+function Reminder(name, description, date, frequency)
+{
     this.name = name;
     this.description = description;
     this.date = date;
@@ -57,8 +59,8 @@ function Reminder(name, description, date, frequency){
 }
 
 //would spawn after current reminder
-Reminder.spawnNextReminder = function() {
-
+Reminder.spawnNextReminder = function()
+{
     var currReminder = Reminder;
     var now = new Date();
     var dateOne;
@@ -106,7 +108,6 @@ Reminder.spawnNextReminder = function() {
 
 //https://stackoverflow.com/questions/499838/javascript-date-next-month
 //https://stackoverflow.com/questions/19225414/how-to-get-the-hours-difference-between-two-date-objects
-//
 
 // Asset Object - Leon Irving B00301496
 
@@ -114,17 +115,19 @@ Reminder.spawnNextReminder = function() {
 Instantiates a new Asset object based on its name, quantity, and isIncome.
 The method also sets reminder to a blank state with just dueDate and frequency fields set.
  */
-var Asset = function(name, quantity, isIncome, frequency, date) {
+function Asset(name, quantity, isIncome, frequency, date)
+{
     this.name = name;
     this.quantity = quantity;
     this.isIncome = isIncome;
     this.reminder = new Reminder(name, "", date, frequency);
-};
+}
 
 /*
 Calls the Reminder() method and sets reminder to the parameters listed.
 */
-Asset.prototype.setReminder = function(name, description, date, frequency){
+Asset.prototype.setReminder = function(name, description, date, frequency)
+{
     this.reminder.name = name;
     this.reminder.description = description;
     this.reminder.date = date;
@@ -134,138 +137,190 @@ Asset.prototype.setReminder = function(name, description, date, frequency){
 /*
 Resets the reminder to a blank state.
 */
-Asset.prototype.removeReminder = function() {
+Asset.prototype.removeReminder = function()
+{
     this.reminder.name = "";
     this.reminder.description = "";
     this.reminder.date = new Date();
     this.reminder.frequency = 0;
 };
 
+/*
+This method instantiates the UserBudget class with the parameters userName, password, and filepath to set the listed fields.
+ */
 function UserBudget(userName, userPassword, filePath)
 {
     this.userName = userName;
     this.userPassword = userPassword;
-    this.saveFileLocation = filePath +"/" + userName;
+    this.saveFileLocation = filePath + "/" + userName;
     this.Income = [];
     this.Expenditure = [];
 }
 
+/*
+This method creates a new Asset based on the parameters and pushes it into the income or expenditure arrays.
+ */
 UserBudget.prototype.addAsset = function(name, quantity, isIncome, frequency, dueDate)
 {
     var a = new Asset(name, quantity, isIncome, frequency, dueDate);
-    if (a.isIncome = true)
+    if (a.isIncome === true)
     {
         this.Income.push(a);
     }
     else
+    {
         this.Expenditure.push(a);
+    }
 };
 
+/*
+This method locates an Asset object based on its location in either the income or expenditure arrays,
+sets it to the listed parameters and pushes it into the income or expenditure arrays.
+ */
 UserBudget.prototype.setAsset = function (index, name, quantity, isIncome, frequency, dueDate)
 {
     if(isIncome){
         if(this.Income.length !== 0)
-            for(var i=0; i< this.Income.length; i++){
-                if(i === index){
-                    this.Income[i] = new Asset(name, quantity, isIncome,frequency, dueDate)
+            for(var i = 0; i < this.Income.length; i++)
+            {
+                if(i === index)
+                {
+                    this.Income[i] = new Asset(name, quantity, isIncome, frequency, dueDate)
                 }
             }
     }
     else
     {
         if(this.Expenditure.length !== 0)
-            for(i=0; i< this.Expenditure.length; i++){
-                if(i === index){
-                    this.Expenditure[i] = new Asset(name, quantity, isIncome,frequency, dueDate)
+            for(i = 0; i < this.Expenditure.length; i++)
+            {
+                if(i === index)
+                {
+                    this.Expenditure[i] = new Asset(name, quantity, isIncome, frequency, dueDate)
                 }
             }
     }
 };
 
-function getAsset (Iindex, isIncome)
+/*
+Retrieve Asset object from either the income or expenditure arrays, based on the index and isIncome parameters.
+ */
+UserBudget.prototype.getAsset = function(Iindex, isIncome)
 {
-    if(isIncome){
-        return Income.splice(Iindex,1);
+    if(isIncome)
+    {
+        return this.Income.splice(Iindex,1);
     }
     else
     {
-        return Expenditure.splice(Iindex,1);
+        return this.Expenditure.splice(Iindex,1);
     }
-}
-
-UserBudget.prototype.removeIncome = function(index, isIncome)
-{
-    if (isIncome = true)
-    {
-        this.Income = Income.splice(index,1);
-    }
-    else
-        this.Expenditure = Expenditure.splice(index,1);
 };
 
-var totalIncome = 0;
+/*
+Remove Asset object from either the income or expenditure arrays, based on the index and isIncome parameters.
+ */
+UserBudget.prototype.removeIncome = function(index, isIncome)
+{
+    if (isIncome === true)
+    {
+        this.Income = this.Income.splice(index,1);
+    }
+    else
+    {
+        this.Expenditure = this.Expenditure.splice(index,1);
+    }
+};
 
+/*
+Returns the total quantity variable of each asset in the income Asset array.
+ */
 UserBudget.prototype.tallyIncome = function()
 {
-   //this.Income.forEach();
+    var totalIncome = 0;
 
-    /*
-    function incomeSum(key)
+    var length = this.Income.length;
+
+    for (var i = 0; i < length; i++)
     {
-        totalIncome += this.key.quantity
-    }
-    */
-
-    for (var i = 0; i > this.Income.length; i++){
         totalIncome += this.Income[i].quantity;
     }
 
     return totalIncome;
-
-   //return this.Income[0].quantity;
 };
 
-var totalExpenditure = 0;
-
-UserBudget.prototype.tallyExpenditure = function ()
+/*
+Returns the total quantity variable of each asset in the expenditure Asset array.
+ */
+UserBudget.prototype.tallyExpenditure = function()
 {
     var totalExpenditure = 0;
-    this.Expenditure.forEach(expenditureSum);
 
-    function expenditureSum()
+    var length = this.Expenditure.length;
+
+    for (var i = 0; i < length; i++)
     {
-        totalExpenditure += this.quantity
+        totalExpenditure += this.Expenditure[i].quantity;
     }
+
     return totalExpenditure;
 };
 
-function tallySavings ()
+/*
+Returns the total quantity variable of each asset in both the income and expenditure Asset arrays.
+ */
+UserBudget.prototype.tallySavings = function()
 {
-    tallyIncome();
-    tallyExpenditure();
-    var totalSavings = totalIncome - totalExpenditure;
-    return totalSavings;
+    return this.tallyIncome() - this.tallyExpenditure();
+};
 
-}
-
-function getAssetByMonth(item){
-    if(item.Reminder.date.getMonth()=== currentMonth){
-
-        if( item.Reminder.date.getYear()=== currentYear){
-
+function getAssetByMonth(item)
+{
+    if(item.Reminder.date.getMonth() === currentMonth)
+    {
+        if(item.Reminder.date.getYear() === currentYear)
+        {
             return true;
         }
     }
-    else{
+    else
+    {
         return false;
     }
-
 }
 
-function getIncomeHistory (index)
+/*
+Retrieves Asset array from the income array, based on the current month of the year.
+ */
+function getIncomeHistory ()
 {
     //First get the month
+    var date = new Date();
+    var currentMonth =  date.getMonth();
+    var currentYear = date.getYear();
 
+    return Income.filter(getAssetByMonth);
+}
+
+/*
+Retrieves Asset array from the expenditure array, based on the current month of the year.
+ */
+function getExpenditureHistory ()
+{
+    //First get the month
+    var date = new Date();
+    var currentMonth =  date.getMonth();
+    var currentYear = date.getYear();
+
+    return Expenditure.filter(getAssetByMonth);
+}
+
+/*
+Retrieve Asset array from the income array, based on the index of the month required.
+ */
+function getIncomeHistoryIndex (index)
+{
+    //First get the month
     var date = new Date();
     var indexMonth =  date.getMonth()- index;
     while(indexMonth <0)
@@ -275,12 +330,14 @@ function getIncomeHistory (index)
     }
 
     var temp = Income.filter(getAssetByMonth);
-
 }
 
-function getExpenditureHistory (index) {
-//First get the month
-
+/*
+Retrieve Asset array from the expenditure array, based on the index of the month required.
+ */
+function getExpenditureHistoryIndex (index)
+{
+    //First get the month
     var date = new Date();
     var indexMonth = date.getMonth() - index;
     while (indexMonth < 0) {
