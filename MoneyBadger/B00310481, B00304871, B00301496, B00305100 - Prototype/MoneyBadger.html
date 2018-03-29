@@ -79,12 +79,16 @@
     </div>
 
     <div data-role="content">
-        <a href="#addIncome" data-role="button">Add Income<br><h3 align="center" id="totalIncome">£0.00</h3></a>
-        <a href="#addExpenditure" data-role="button">Add Expenditure<br><h3 align="center" id="totalExpenditure">£0.00</h3></a>
+        <div>
+            <a href="#addIncome" data-role="button">Add Income<br><div><output type="number" align="center" id="totalIncome">£0.00</output></div></a>
+        </div>
+        <div>
+            <a href="#addExpenditure" data-role="button">Add Expenditure<br><div><output type="number" align="center" id="totalExpenditure">£0.00</output></div></a>
+        </div>
 
         <div style="background-image: linear-gradient(#3388cc, DeepSkyBlue); border-radius: 10px;">
             <h2 align="center">Total Savings</h2>
-            <h1 align="center" id="totalSavings">£0.00</h1>
+            <div align="center" size="7"><output type="number" style="font-size: 30px; font-weight: bold" id="totalSavings">£0.00</output></div>
         </div>
 
         <a href="#history" data-role="button">View History</a>
@@ -128,17 +132,20 @@
             Name<br>
             <input type="text" id="addIncomeName"><br>
             Amount<br>
-            <input type="text" id="addIncomeAmount"><br>
+            <input type="number" id="addIncomeAmount"><br>
             Date<br>
             <input type="date" id="addIncomeDate">
             Frequency<br>
             <select id="addIncomeFrequency">
-                <option value="freqIncomeOne">1</option>
-                <option value="freqIncomeTwo">2</option>
-                <option value="freqIncomeThree">3</option>
+                    <option value=1>Once a month</option>
+                    <option value=2>Every two days</option>
+                    <option value=3>Every week</option>
+                    <option value=4>Every two weeks</option>
             </select>
         </form><br>
-        <a href="#home" data-role="button" id="addIncomeConfirm">Confirm</a>
+        <div id="addIncomeConfirm">
+            <a href="#home" data-role="button">Confirm</a>
+        </div>
     </div>
 
     <div data-role="footer" data-position="fixed">
@@ -161,8 +168,17 @@
             <input type="text" id="addExpenditureAmount"><br>
             Date<br>
             <input type="date" id="addExpenditureDate">
+            Frequency<br>
+            <select id="addExpenditureFrequency">
+                <option value=1>Once a month</option>
+                <option value=2>Every two days</option>
+                <option value=3>Every week</option>
+                <option value=4>Every two weeks</option>
+            </select>
         </form><br>
-        <a href="#home" data-role="button" id="addExpenditureConfirm">Confirm</a>
+        <div id="addExpenditureConfirm">
+            <a href="#home" data-role="button">Confirm</a>
+        </div>
     </div>
 
     <div data-role="footer" data-position="fixed">
@@ -283,8 +299,12 @@
             Date<br>
             <input type="date" id="editReminderDate"><br>
             Frequency<br>
-            <input type="text" id="editReminderFrequency"><br>
-
+            <select>
+                <option value=1>Once a month</option>
+                <option value=2>Every two days</option>
+                <option value=3>Every week</option>
+                <option value=4>Every two weeks</option>
+            </select>
         </form>
         <a href="#home" data-role="button" id="editReminderConfirm">Confirm</a>
     </div>
