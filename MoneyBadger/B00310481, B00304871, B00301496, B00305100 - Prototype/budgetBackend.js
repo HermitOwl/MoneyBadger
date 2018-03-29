@@ -1,5 +1,32 @@
-var u = new UserBudget("username", "password", "filepath");
+u = new UserBudget("username", "password", "filepath");
 
+$(document).on("pageinit", "#addIncome", function()
+{
+    $("#addIncomeConfirm").on("click", function()
+    {
+        u.addAsset($("#addIncomeName").val(), parseFloat($("#addIncomeAmount").val()), true, $("#addIncomeFrequency").val(), $("#addIncomeDate").val());
+        document.getElementById("totalIncome").innerHTML = "£" + u.tallyIncome().toFixed(2);
+        document.getElementById("totalSavings").innerHTML = "£" + u.tallySavings().toFixed(2);
+        $("#addIncomeAmount").val("");
+        $("#addIncomeName").val("");
+        $("#addIncomeDate").val(new Date());
+    });
+});
+
+$(document).on("pageinit", "#addExpenditure", function()
+{
+    $("#addExpenditureConfirm").on("click", function()
+    {
+        u.addAsset($("#addExpenditureName").val(), parseFloat($("#addExpenditureAmount").val()), false, $("#addExpenditureFrequency").val(), $("#addExpenditureDate").val());
+        document.getElementById("totalExpenditure").innerHTML = "£" + u.tallyExpenditure().toFixed(2);
+        document.getElementById("totalSavings").innerHTML = "£" + u.tallySavings().toFixed(2);
+        $("#addExpenditureAmount").val("");
+        $("#addExpenditureName").val("");
+        $("#addExpenditureDate").val(new Date());
+    });
+});
+
+/*
 document.onload = function(){
     //Initial Login Page
     var nameStart = document.getElementById("nameStart");
@@ -12,11 +39,6 @@ document.onload = function(){
     var password = document.getElementById("password");
     var loginConfirm = document.getElementById("loginConfirm");
 
-    //Main Menu
-    var totalIncome = document.getElementById("totalIncome").valueOf();
-    var totalExpenditure = document.getElementById("totalExpenditure").valueOf();
-    var totalSavings = document.getElementById("totalSavings").valueOf();
-
     //Settings Page
     var changeDetailsButton = document.getElementById("changeDetails");
         //changeDetailsButton.onclick =
@@ -26,23 +48,8 @@ document.onload = function(){
         //budgetResetButton.onclick =
     var userResetButton = document.getElementById("userReset");
         //userResetButton.onclick =
-
-    //Add Income Page
-    var addIncomeNameField = document.getElementById("addIncomeName");
-    var addIncomeQuantityField = document.getElementById("addIncomeAmount");
-    var addIncomeDateField = document.getElementById("addIncomeDate");
-    var addIncomeFreqField = document.getElementById("addIncomeFrequency");
-    var addIncomeConfirmButton = document.getElementById("addIncomeConfirm");
-    addIncomeConfirmButton.onclick = addAsset(addIncomeNameField.value, addIncomeQuantityField.value, true, addIncomeFreqField.value, addIncomeDateField.value);
-
-    //Add Expenditure Page
-    var addExpenditureNameField = document.getElementById("addExpenditureName");
-    var addExpenditureQuantityField = document.getElementById("addExpenditureAmount");
-    var addExpenditureDateField = document.getElementById("addExpenditureDate");
-    var addExpenditureFreqField = document.getElementById("addExpenditureFrequency");
-    var addExpenditureConfirmButton = document.getElementById("addExpenditureConfirm");
-    addExpenditureConfirmButton.onclick = addAsset(addExpenditureNameField.value, addExpenditureQuantityField.value, true, addExpenditureFreqField.value, addExpenditureDateField.value);
 };
+*/
 
 function IOControl(userFilePath){
 	this.userFilePath = userFilePath;
@@ -58,6 +65,45 @@ function Reminder(name, description, date, frequency)
     this.frequency = frequency
 }
 
+//would spawn after current reminder
+var spawnNextReminder = function() {
+    //alert("here");
+    var now = new Date();
+
+    //once a month - usual payment method
+    if (Reminder.frequency = 1)
+    {
+       // alert("in first statement");
+        new Reminder().date = new Date(now.getDay(),now.getMonth()+1,now.getFullYear());
+    }
+
+    if (Reminder.frequency = 2)
+    {
+        new Reminder().date = new Date(now.getDay()+2,now.getMonth(),now.getFullYear());
+    }
+
+    if (Reminder.frequency = 3)
+    {
+        new Reminder().date = new Date(now.getDay()+7,now.getMonth()+1,now.getFullYear());
+    }
+
+    if (Reminder.frequency = 4)
+    {
+       // alert("in last statement");
+        new Reminder().date = new Date(now.getDay()+14,now.getMonth()+1,now.getFullYear());
+    }
+};
+
+Reminder.prototype.isDue = function()
+{
+    var now = new Date();
+    if(now >= Reminder.dateTime)
+    {
+        alert("Check Reminders");
+    }
+};
+
+/*
 //would spawn after current reminder
 Reminder.spawnNextReminder = function()
 {
@@ -108,7 +154,7 @@ Reminder.spawnNextReminder = function()
 
 //https://stackoverflow.com/questions/499838/javascript-date-next-month
 //https://stackoverflow.com/questions/19225414/how-to-get-the-hours-difference-between-two-date-objects
-
+/*
 // Asset Object - Leon Irving B00301496
 
 /*
@@ -271,7 +317,11 @@ Returns the total quantity variable of each asset in both the income and expendi
  */
 UserBudget.prototype.tallySavings = function()
 {
-    return this.tallyIncome() - this.tallyExpenditure();
+    var totalSavings = this.tallyIncome() - this.tallyExpenditure();
+    if (totalSavings < 0){
+        totalSavings = 0;
+    }
+    return totalSavings;
 };
 
 function getAssetByMonth(item)
