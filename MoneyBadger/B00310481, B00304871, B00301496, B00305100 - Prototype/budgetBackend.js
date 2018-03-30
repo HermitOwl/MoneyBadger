@@ -1,4 +1,7 @@
 u = new UserBudget("username", "password", "filepath");
+var firstStart = true;
+
+
 
 $(document).on("pageinit", "#addIncome", function()
 {
@@ -58,7 +61,7 @@ This function takes in a userBudget object, inspects it and returns a XML string
 function userBudgetToXML(userBudget){
 	//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
 	var temp =`<?xml version="1.0" encoding = "UTF-8"?> 
-	<user id="${userBudget.userName}" checksum="${generateChecksum()}-${userBudget.userPassword}">
+	<user id="${userBudget.userName}" checksum="${generateChecksum()}">
 	<income>
 	${userbudget.income.forEach(assetToXML())}
 	</income>
@@ -79,6 +82,34 @@ function userBudgetToXML(userBudget){
 		</asset>`
 		return temp;
 	}
+	
+}
+
+function userBudgetToCSV(userBudget){
+	var temp =`income, ,Expenditure, \n  name, quantity, name, quantity \n ${}`;
+	
+	function assetToCSV(){
+		var temp ="";
+		var i = 0;
+		var max = Math.max(Income.length, expenditure.length);
+		while(i< max){
+		if(i < u.Income.length){
+			temp += Income[i].name + "," Income[i].quantity + ",";
+		}
+		else {
+			temp += ", ,";
+		}
+		if(i < u.Expenditure.length){
+			temp += Expenditure[i].name + "," Expenditure[i].quantity ;
+		}
+		else {
+			temp += ",";
+		}
+		i++;
+	}
+	temp+= "/n";
+	}
+	
 	
 }
 
@@ -110,9 +141,10 @@ function verifyPassword(){
 		document.getElementById("passwordStart").value="";
 		document.getElementById("passwordConfirm").value="";
 		u = new UserBudget(nameStart,passwordConfirm,"user");
-		io= new IOControl(userBudget.filePath);
+		io= new IOControl(u.filePath);
 		alert("success you have opened a new account");
-		
+		firstStart =false;
+		window.localStorage.setItem("firstStart",firstStart);
 	}
 
 };
