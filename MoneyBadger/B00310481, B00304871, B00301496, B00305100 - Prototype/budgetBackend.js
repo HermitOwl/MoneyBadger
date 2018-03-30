@@ -51,10 +51,223 @@ document.onload = function(){
 };
 */
 
+//B00310481
+/*
+This function takes in a userBudget object, inspects it and returns a XML string 
+*/
+function userBudgetToXML(userBudget){
+	//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+	var temp =`<?xml version="1.0" encoding = "UTF-8"?> 
+	<user id="${userBudget.userName}" checksum="${generateChecksum()}-${userBudget.userPassword}">
+	<income>
+	${userbudget.income.forEach(assetToXML())}
+	</income>
+	<expenditure>
+	${userbudget.expenditure.forEach(assetToXML())}
+	</expenditure>
+	</user>
+	`;
+	
+	function assetToXML(){
+		var temp=`<asset id="${this.name}" quantity="${this.quantity}">
+		<reminder frequency="${this.reminder.frequency}">
+		<description>
+		${this.reminder.description}
+		</description>
+		<date>${this.reminder.date.getMonth()},${this.reminder.date.getDate()},${this.reminder.date.getFullYear()}}</date>
+		</reminder>
+		</asset>`
+		return temp;
+	}
+	
+}
+
 function IOControl(userFilePath){
 	this.userFilePath = userFilePath;
 	this.userFile ="";
-}
+};
+
+/*
+This takes the two string parameters password and 
+passwordConfirm and compares them and returns the boolean result.
+*/
+function verifyPassword(){
+	document.getElementById("initialLoginConfirm").href = "#initial"
+	var nameStart = document.getElementById("nameStart");
+    var passwordStart = document.getElementById("passwordStart");
+    var passwordConfirm = document.getElementById("passwordConfirm");
+	if((nameStart.value.trim()=="")||(passwordStart.value.trim() == "")|| (passwordConfirm.value.trim() =="")){
+	window.alert("please fill all details");
+	}
+	else if(passwordStart.value != passwordConfirm.value){
+		window.alert("Sorry the passwords don't match");
+		document.getElementById("passwordStart").value="";
+		document.getElementById("passwordConfirm").value="";
+		//window.alert(nameStart.value +" "+ passwordStart.value+ " "+ passwordConfirm.value);
+	}else{
+		document.getElementById("initialLoginConfirm").href = "#home";
+		document.getElementById("nameStart").value="";
+		document.getElementById("passwordStart").value="";
+		document.getElementById("passwordConfirm").value="";
+		u = new UserBudget(nameStart,passwordConfirm,"user");
+		io= new IOControl(userBudget.filePath);
+		alert("success you have opened a new account");
+		
+	}
+
+};
+
+
+
+/*
+This method checks if a file path is stored in userFilePath, 
+if the file path is correct, 
+and then stores the information in said file as string in userFile.
+*/
+IOControl.prototype.readFile = function(){
+	if(window.localStorage.getItem(userfilePath) != null){
+	var userfile = window.localStorage.getItem(userFilePath)
+	}
+	else 	alert("Username Not found");
+};
+
+/*
+This method, taking the parameters userName and password,
+ determines whether the string stored in userFile matches the information given
+ in the parameters.
+*/
+function verifyAccount (userName, passWord){
+		//assuming the file is called from LocalStorage 
+		if(userFile != ""){
+			var temp = "";
+		}
+		alert("Not complete");
+};
+
+
+
+/*
+This parses the string field userFile,
+provided it is not empty and well-formed, 
+and stores it as a UserBudget object, which is returned.
+*/
+IOControl.prototype.getUserBudget = function(){
+		alert("Not complete");
+	return "";
+};
+
+/*
+This method parses the userBudget parameter as a string and stores it in userFile,
+then storing it in local Storage. 
+The method then returns the success or failure of the store as a boolean.
+*/
+IOControl.prototype.saveAccount = function(userBudget){
+	window.localStorage.setItem(userBudget.filePath,userBudgetToXML(userBudget));
+		alert("Not complete");
+	return false;
+};
+/*
+This method, after executing the saveAccount() method, parses the information 
+to a temporary string in the .csv format and saves it in local storage.
+*/
+IOControl.prototype.exportAsCSV = function(){
+	alert("Not complete");
+	
+	return false;
+};
+
+
+
+/*This method takes in the parameters userBudget and pageIndex, 
+and returns the Asset list associated with the pageIndex,
+determined by the UserBudget objects income and expenditure Lists.
+*/
+IOControl.prototype.historyForwardEvent = function(userBudget, pageIndex){
+	alert("Not tested");
+	
+	//return Asset[] assetList;
+};
+
+/*
+This method takes in the parameters userBudget and pageIndex, 
+and returns the Asset list associated with the pageIndex, 
+determined by the UserBudget objects income and expenditure Lists.
+*/
+IOControl.prototype.historyBackEvent = function(userBudget, pageIndex){
+	alert("Not complete");
+ //return Asset[] assetList
+ };
+
+/*
+This method takes in the parameters asset and userBudget 
+and pushes the Asset into said list. 
+*/
+IOControl.prototype.confirmAssetEvent = function(name, quantity, isIncome, frequency, dueDate, index, userBudget){
+	
+	alert("Not Complete");
+};
+
+/*
+This method takes in the parameters reminder, index and userBudget, 
+then saves the reminder in an Asset (from either the income or expenditure lists) 
+in userBudget.
+*/
+IOControl.prototype.confirmReminderEvent =function(name, description, date, frequency, index, userBudget){
+	alert("Not complete");
+};
+
+/*
+This method takes in the parameters index, asset and userBudget, 
+identifies the Asset to be edited via index, 
+and then replaces said Asset in its list within userBudget.
+*/
+IOControl.prototype.editAssetEvent =function(index, asset, userBudget, isIncome){
+	alert("not Complete");
+};
+/*
+This method takes in the parameters reminder, 
+index and isIncome userBudget, identifies the Asset the reminder belongs to, 
+then saves the reminder in said Asset in userBudget.
+*/
+IOControl.prototype.editReminderEvent = function(index, reminder, userBudget, IsIncome){
+	alert("not Complete");
+};
+/*
+This method takes in the parameters index and userBudget, identifies the Asset the reminder belongs to, 
+then instantiates a blank reminder in said Asset in userBudget.
+removes 
+*/
+IOControl.prototype.removeReminderEvent = function(index, UserBudget, isIncome)
+{
+alert("not Complete");
+};
+/*
+This method generates a checksum for file and user validation and verification, and returns it as a string.
+*/
+IOControl.prototype.generateChecksum = function(){
+
+	var date = new Date();
+	var calculation = function(date){
+		if(date.getDay() % 2 == 0){
+			return 1299203 * 3^(-Math.sin((date.getMonth()+1)* date.getDate()+ (date.getYear() % 50)));
+		}
+		else{
+			return 1299203 * 7^(-Math.sin((date.getMonth()+1)* date.getDate()+ (date.getYear() % 50)));
+		}
+		
+		
+	}
+	var checksum = calculation(date).toString(16);
+	
+	return checksum;
+};
+/*
+This method saves backup checksum information in case of errors.
+*/
+IOControl.prototype.saveCheckDocument = function(){
+window.localStorage.setItem(userFilePath+"checkSum",new IOControl().generateChecksum());
+	
+};
 
 //B00304871
 function Reminder(name, description, date, frequency)
