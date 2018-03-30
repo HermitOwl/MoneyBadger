@@ -1,6 +1,6 @@
-u = new UserBudget("username", "password", "filepath");
+var u = new UserBudget("username", "password", "filepath");
 var firstStart = true;
-
+var io = new IOControl(u.filepath);
 
 
 $(document).on("pageinit", "#addIncome", function()
@@ -61,12 +61,12 @@ This function takes in a userBudget object, inspects it and returns a XML string
 function userBudgetToXML(userBudget){
 	//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
 	var temp =`<?xml version="1.0" encoding = "UTF-8"?> 
-	<user id="${userBudget.userName}" checksum="${generateChecksum()}">
+	<user id="${userBudget.userName}" checksum="${io.generateChecksum()}">
 	<income>
-	${userbudget.income.forEach(assetToXML())}
+	${userbudget.Income.forEach(assetToXML())}
 	</income>
 	<expenditure>
-	${userbudget.expenditure.forEach(assetToXML())}
+	${userbudget.Expenditure.forEach(assetToXML())}
 	</expenditure>
 	</user>
 	`;
@@ -83,24 +83,26 @@ function userBudgetToXML(userBudget){
 		return temp;
 	}
 	
+	window.localStorage.setItem(u.filePath, temp );
 }
 
 function userBudgetToCSV(userBudget){
-	var temp =`income, ,Expenditure, \n  name, quantity, name, quantity \n ${}`;
-	
+	var temp =`data:text/csv;charset=utf-8, \n income, ,Expenditure, \n  name, quantity, name, quantity \n ${assetToCSV}`;
+	var data;
+	var filename;
 	function assetToCSV(){
 		var temp ="";
 		var i = 0;
 		var max = Math.max(Income.length, expenditure.length);
 		while(i< max){
 		if(i < u.Income.length){
-			temp += Income[i].name + "," Income[i].quantity + ",";
+			temp += Income[i].name + "," + Income[i].quantity + ",";
 		}
 		else {
 			temp += ", ,";
 		}
 		if(i < u.Expenditure.length){
-			temp += Expenditure[i].name + "," Expenditure[i].quantity ;
+			temp += Expenditure[i].name + "," +Expenditure[i].quantity ;
 		}
 		else {
 			temp += ",";
@@ -110,7 +112,13 @@ function userBudgetToCSV(userBudget){
 	temp+= "/n";
 	}
 	
+	filename = u.filepath;
+	data = encodeURI(temp);
 	
+      
+        document.getElementById("csvExport").setAttribute('href', data);
+        document.getElementById("csvExport").setAttribute('download', filename );
+        document.getElementById("csvExport").click();	
 }
 
 function IOControl(userFilePath){
@@ -145,6 +153,7 @@ function verifyPassword(){
 		alert("success you have opened a new account");
 		firstStart =false;
 		window.localStorage.setItem("firstStart",firstStart);
+		window.localStorage.setItem(u.filepath, userBudgetToXML(u));
 	}
 
 };
